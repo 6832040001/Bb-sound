@@ -1043,6 +1043,317 @@
       color: var(--copper-light);
       box-shadow: 0 2px 0 rgba(0, 0, 0, 0.5);
     }
+
+    /* ==========================================================================
+       AUDIO-TO-NOTE EXTRACTOR (ระบบแกะโน้ตและคอร์ดอัตโนมัติ)
+       ========================================================================== */
+    .extractor-card {
+      background: linear-gradient(155deg, #171b24 0%, #12151c 100%);
+      border: 1.5px solid rgba(217, 119, 54, 0.32);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .extractor-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .extractor-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .extractor-badge {
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(217, 119, 54, 0.16);
+      border: 1px solid rgba(217, 119, 54, 0.4);
+      color: var(--copper-light);
+      font-weight: 600;
+    }
+
+    .extractor-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 5px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .extractor-tab-btn {
+      padding: 10px 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 8px;
+      font-family: 'Prompt', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .extractor-tab-btn.active {
+      background: linear-gradient(135deg, rgba(217, 119, 54, 0.28), rgba(34, 38, 48, 0.92));
+      border-color: var(--copper);
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    .yt-input-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .yt-url-input {
+      flex: 1;
+      min-width: 220px;
+      background: #0c0e12;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: 'Prompt', sans-serif;
+      font-size: 0.88rem;
+      outline: none;
+    }
+
+    .yt-url-input:focus {
+      border-color: var(--copper);
+      box-shadow: 0 0 0 2px rgba(217, 119, 54, 0.2);
+    }
+
+    .extract-action-btn {
+      background: linear-gradient(135deg, var(--copper), #b45309);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      color: #fff;
+      font-family: 'Prompt', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.12s, opacity 0.15s;
+    }
+
+    .extract-action-btn:active {
+      transform: scale(0.96);
+    }
+
+    .demo-extract-btn {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      color: #fff;
+      font-family: 'Prompt', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+      transition: transform 0.12s;
+    }
+
+    .demo-extract-btn:active {
+      transform: scale(0.96);
+    }
+
+    .cors-notice-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      color: #fde68a;
+      line-height: 1.55;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .upload-dropzone {
+      border: 2px dashed rgba(217, 119, 54, 0.45);
+      border-radius: 12px;
+      padding: 18px 14px;
+      background: rgba(0, 0, 0, 0.25);
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .upload-dropzone:hover {
+      background: rgba(217, 119, 54, 0.08);
+      border-color: var(--copper-light);
+    }
+
+    .extractor-results-area {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 12px;
+    }
+
+    .detected-chords-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .detected-chord-chip {
+      background: rgba(217, 119, 54, 0.18);
+      border: 1px solid rgba(217, 119, 54, 0.45);
+      color: var(--text-accent);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .detected-chord-chip:hover {
+      background: var(--copper);
+      color: #fff;
+    }
+
+    .extractor-playback-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .play-extracted-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      border: none;
+      border-radius: 10px;
+      padding: 9px 16px;
+      color: #fff;
+      font-family: 'Prompt', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .play-extracted-btn.playing {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+    }
+
+    .speed-control-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .note-timeline-wrap {
+      overflow-x: auto;
+      background: #0b0d12;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 10px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--copper) #14171f;
+    }
+
+    .note-timeline-track {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      min-height: 86px;
+      width: max-content;
+    }
+
+    .note-block {
+      min-width: 64px;
+      background: linear-gradient(180deg, #222736 0%, #171b24 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 8px 8px 6px 8px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3px;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .note-block:hover {
+      border-color: var(--copper-light);
+      transform: translateY(-2px);
+    }
+
+    .note-block.active-playing {
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.38) 0%, rgba(5, 150, 105, 0.22) 100%);
+      border-color: #34d399;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.45);
+      transform: translateY(-4px) scale(1.04);
+    }
+
+    .note-block-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .note-block-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-accent);
+    }
+
+    .note-block-dur {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--text-dim);
+    }
   </style>
 </head>
 <body>
@@ -1062,6 +1373,92 @@
         <span>🔊 แตะเพื่อเปิดเสียง (Start Audio)</span>
       </button>
     </header>
+
+    <!-- ==========================================================================
+         AUDIO-TO-NOTE EXTRACTOR (ระบบแกะโน้ตและคอร์ดเพลงอัตโนมัติ)
+         ========================================================================== -->
+    <section class="extractor-card" id="extractorSection">
+      <div class="extractor-top-bar">
+        <div class="extractor-title">
+          <span>🎼</span>
+          <span>ระบบแกะโน้ตและคอร์ดเพลงอัตโนมัติ (Audio-to-Note Extractor)</span>
+        </div>
+        <span class="extractor-badge" id="extractStatusBadge">พร้อมวิเคราะห์คลื่นเสียง</span>
+      </div>
+
+      <!-- แถบเมนู 2 แท็บด้านบน -->
+      <div class="extractor-tabs">
+        <button class="extractor-tab-btn active" id="tabExtractYoutube" onclick="switchExtractorTab('youtube')">
+          <span>🎬</span>
+          <span>วางลิงก์ YouTube</span>
+        </button>
+        <button class="extractor-tab-btn" id="tabExtractUpload" onclick="switchExtractorTab('upload')">
+          <span>📁</span>
+          <span>อัปโหลดไฟล์เสียง (.mp3, .wav)</span>
+        </button>
+      </div>
+
+      <!-- แท็บ 1: วางลิงก์ YouTube -->
+      <div id="panelExtractYoutube">
+        <div class="yt-input-row">
+          <input type="url" class="yt-url-input" id="ytUrlInput" placeholder="วางลิงก์ YouTube ที่นี่ เช่น https://www.youtube.com/watch?v=..." />
+          <button class="extract-action-btn" onclick="analyzeYoutubeUrl()">
+            <span>🔍 วิเคราะห์เพลง</span>
+          </button>
+          <button class="demo-extract-btn" onclick="runDemoExtraction()">
+            <span>🎵 ทดลองเล่นเพลงตัวอย่าง (Demo)</span>
+          </button>
+        </div>
+
+        <div class="cors-notice-box" id="ytCorsAlert" style="margin-top: 10px;">
+          <div>
+            <strong>ℹ️ ข้อจำกัดด้านความปลอดภัยของเบราว์เซอร์ (CORS):</strong> ระบบหน้าเว็บ (Frontend) อย่างเดียวไม่สามารถดึงไฟล์เสียงจากลิงก์ YouTube โดยตรงได้ หากต้องการดึงเสียงจากลิงก์โดยตรงต้องใช้ระบบหลังบ้าน (<strong>Python + yt-dlp + Basic Pitch</strong>)
+          </div>
+          <div>
+            💡 คุณสามารถกดปุ่ม <strong>"ทดลองเล่นเพลงตัวอย่าง (Demo)"</strong> ด้านบนเพื่อทดสอบระบบแกะโน้ตและเล่นอัตโนมัติได้ทันที หรือสลับไปที่แท็บ <strong>"อัปโหลดไฟล์เสียง (.mp3, .wav)"</strong> เพื่อแกะโน้ตจากไฟล์ในเครื่อง!
+          </div>
+        </div>
+      </div>
+
+      <!-- แท็บ 2: อัปโหลดไฟล์เสียง -->
+      <div id="panelExtractUpload" style="display: none;">
+        <label class="upload-dropzone" for="audioFileInput">
+          <span style="font-size: 1.8rem;">🎧</span>
+          <span style="font-weight: 700; color: #fff; font-size: 0.92rem;">คลิกเพื่อเลือกไฟล์เสียง (.mp3, .wav, .ogg, .m4a)</span>
+          <span style="font-size: 0.78rem; color: var(--text-muted);" id="uploadFileNameText">รองรับการวิเคราะห์ความถี่และแปลงเป็นตัวโน้ตบนเครื่องของคุณ 100% (ไม่ส่งไฟล์ออกนอกเครื่อง)</span>
+          <input type="file" id="audioFileInput" accept=".mp3,.wav,audio/mpeg,audio/wav,audio/*" style="display: none;" onchange="handleAudioFileUpload(event)" />
+        </label>
+      </div>
+
+      <!-- ส่วนแสดงผลไทม์ไลน์โน้ตที่แกะได้ + ปุ่มเล่นอัตโนมัติ -->
+      <div class="extractor-results-area" id="extractorResultsArea">
+        <div class="detected-chords-row" id="detectedChordsRow">
+          <!-- คอร์ดที่วิเคราะห์ได้จะแสดงที่นี่ -->
+        </div>
+
+        <div class="extractor-playback-bar">
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <button class="play-extracted-btn" id="btnPlayExtracted" onclick="toggleExtractedPlayback()">
+              <span id="playExtractedIcon">▶</span>
+              <span id="playExtractedText">เล่นโน้ตที่แกะได้อัตโนมัติ</span>
+            </button>
+            <span style="font-size: 0.78rem; color: var(--text-muted);" id="extractSummaryInfo">0 โน้ต</span>
+          </div>
+
+          <div class="speed-control-wrap">
+            <span>ความเร็วฝึกเล่น:</span>
+            <input type="range" class="vol-slider" id="extractSpeedSlider" min="0.5" max="1.5" step="0.05" value="1.0" style="width: 120px;" oninput="updateExtractSpeed(this.value)" />
+            <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: var(--copper-light); min-width: 44px;" id="extractSpeedVal">1.00x</span>
+          </div>
+        </div>
+
+        <div class="note-timeline-wrap" id="noteTimelineWrap">
+          <div class="note-timeline-track" id="noteTimelineContainer">
+            <!-- บล็อกโน้ตแบบคลิกได้เรียงตามไทม์ไลน์ -->
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- INSTRUMENT SELECTOR TABS -->
     <div class="instrument-selector-bar">
@@ -2546,7 +2943,422 @@
     });
 
     /* ==========================================================================
-       11. INITIALIZATION (ทำงานทันทีแบบ 100% FAIL-SAFE)
+       11. AUDIO-TO-NOTE EXTRACTOR (วิเคราะห์คลื่นเสียง & ไทม์ไลน์เล่นอัตโนมัติ)
+       ========================================================================== */
+    const extractorState = {
+      extractedNotes: [],     // [{ note, freq, startTime, duration }]
+      detectedChords: [],     // ['C', 'G', 'Am', 'F']
+      isPlaying: false,
+      speed: 1.0,             // 0.5x .. 1.5x
+      playbackTimers: [],
+      activeIndex: -1
+    };
+
+    const NOTE_NAMES_SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+
+    /** สลับแท็บระหว่าง "วางลิงก์ YouTube" และ "อัปโหลดไฟล์เสียง" */
+    function switchExtractorTab(tab) {
+      const isYt = (tab === 'youtube');
+      document.getElementById('tabExtractYoutube').classList.toggle('active', isYt);
+      document.getElementById('tabExtractUpload').classList.toggle('active', !isYt);
+      document.getElementById('panelExtractYoutube').style.display = isYt ? 'block' : 'none';
+      document.getElementById('panelExtractUpload').style.display = isYt ? 'none' : 'block';
+    }
+
+    /** แจ้งเตือนข้อจำกัด CORS เมื่อกดวิเคราะห์ลิงก์ YouTube */
+    function analyzeYoutubeUrl() {
+      const urlVal = (document.getElementById('ytUrlInput').value || '').trim();
+      const alertBox = document.getElementById('ytCorsAlert');
+      const badge = document.getElementById('extractStatusBadge');
+
+      if (!urlVal) {
+        if (badge) badge.textContent = 'กรุณาวางลิงก์ YouTube ก่อนครับ';
+      } else {
+        if (badge) badge.textContent = 'ติดข้อจำกัด CORS (ต้องใช้ Backend)';
+      }
+
+      if (alertBox) {
+        alertBox.style.borderColor = '#f59e0b';
+        alertBox.style.background = 'rgba(245, 158, 11, 0.16)';
+        setTimeout(() => {
+          alertBox.style.background = 'rgba(245, 158, 11, 0.08)';
+        }, 500);
+      }
+    }
+
+    /** รับไฟล์เสียง .mp3 / .wav จากเครื่องผู้ใช้แล้วถอดรหัสด้วย AudioContext */
+    async function handleAudioFileUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      stopExtractedPlayback();
+      const badge = document.getElementById('extractStatusBadge');
+      const fileText = document.getElementById('uploadFileNameText');
+      if (fileText) fileText.textContent = `กำลังวิเคราะห์ไฟล์: ${file.name} ...`;
+      if (badge) badge.textContent = 'กำลังถอดรหัสคลื่นเสียง...';
+
+      try {
+        const ctx = initNativeAudioEngine();
+        if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
+
+        const arrayBuf = await file.arrayBuffer();
+        const audioBuffer = await ctx.decodeAudioData(arrayBuf);
+        await analyzeAudioBuffer(audioBuffer, file.name);
+        if (fileText) fileText.textContent = `วิเคราะห์สำเร็จ: ${file.name} (${audioBuffer.duration.toFixed(1)} วินาที)`;
+      } catch (err) {
+        if (badge) badge.textContent = 'ไม่สามารถถอดรหัสไฟล์เสียงนี้ได้';
+        if (fileText) fileText.textContent = 'เกิดข้อผิดพลาดในการอ่านไฟล์ กรุณาลองไฟล์ .mp3 หรือ .wav อื่น';
+      }
+    }
+
+    /** สร้างเพลงตัวอย่าง (Demo) ด้วย OfflineAudioContext แล้วส่งเข้าตัวแกะโน้ตจริง */
+    async function runDemoExtraction() {
+      stopExtractedPlayback();
+      const badge = document.getElementById('extractStatusBadge');
+      if (badge) badge.textContent = 'กำลังสร้างและแกะโน้ตเพลงตัวอย่าง...';
+
+      const ctx = initNativeAudioEngine();
+      if (ctx && ctx.state === 'suspended') ctx.resume().catch(() => {});
+
+      // ลำดับโน้ตตัวอย่างทางคอร์ด C - G - Am - F (8 วินาที)
+      const demoSequence = [
+        { note: 'C4', t: 0.0, d: 0.45 }, { note: 'E4', t: 0.5, d: 0.45 }, { note: 'G4', t: 1.0, d: 0.45 }, { note: 'C5', t: 1.5, d: 0.45 },
+        { note: 'G3', t: 2.0, d: 0.45 }, { note: 'B3', t: 2.5, d: 0.45 }, { note: 'D4', t: 3.0, d: 0.45 }, { note: 'G4', t: 3.5, d: 0.45 },
+        { note: 'A3', t: 4.0, d: 0.45 }, { note: 'C4', t: 4.5, d: 0.45 }, { note: 'E4', t: 5.0, d: 0.45 }, { note: 'A4', t: 5.5, d: 0.45 },
+        { note: 'F3', t: 6.0, d: 0.45 }, { note: 'A3', t: 6.5, d: 0.45 }, { note: 'C4', t: 7.0, d: 0.45 }, { note: 'E4', t: 7.5, d: 0.45 }
+      ];
+
+      const sampleRate = 22050;
+      const offlineCtx = new OfflineAudioContext(1, Math.floor(sampleRate * 8.2), sampleRate);
+
+      demoSequence.forEach(item => {
+        const osc = offlineCtx.createOscillator();
+        const gain = offlineCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(noteNameToFreq(item.note), item.t);
+
+        gain.gain.setValueAtTime(0.001, item.t);
+        gain.gain.linearRampToValueAtTime(0.45, item.t + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.001, item.t + item.d);
+
+        osc.connect(gain);
+        gain.connect(offlineCtx.destination);
+        osc.start(item.t);
+        osc.stop(item.t + item.d + 0.02);
+      });
+
+      const renderedBuffer = await offlineCtx.startRendering();
+      await analyzeAudioBuffer(renderedBuffer, 'Demo: Acoustic Melody (C - G - Am - F)');
+
+      // เล่นโน้ตที่แกะได้อัตโนมัติทันทีเพื่อความสะดวกในการทดสอบ
+      toggleExtractedPlayback();
+    }
+
+    /** วิเคราะห์ AudioBuffer ด้วย Autocorrelation Pitch Detection */
+    async function analyzeAudioBuffer(audioBuffer, sourceLabel) {
+      const badge = document.getElementById('extractStatusBadge');
+      const channelData = audioBuffer.getChannelData(0);
+      const sampleRate = audioBuffer.sampleRate;
+
+      // วิเคราะห์สูงสุด 60 วินาทีแรกเพื่อความรวดเร็วและลื่นไหลบนทุกอุปกรณ์
+      const maxSamples = Math.min(channelData.length, sampleRate * 60);
+      const frameSize = sampleRate >= 40000 ? 2048 : 1024;
+      const hopSize = frameSize;
+      const frames = [];
+
+      for (let offset = 0; offset + frameSize <= maxSamples; offset += hopSize) {
+        const slice = channelData.subarray(offset, offset + frameSize);
+        const freq = autoCorrelatePitch(slice, sampleRate);
+        const timeSec = offset / sampleRate;
+
+        if (freq > 75 && freq < 1100) {
+          const info = freqToNoteInfo(freq);
+          frames.push({ note: info.note, freq: Math.round(freq), time: timeSec });
+        } else {
+          frames.push({ note: null, freq: 0, time: timeSec });
+        }
+      }
+
+      const hopSec = hopSize / sampleRate;
+      const mergedNotes = mergeFramesToNotes(frames, hopSec);
+
+      extractorState.extractedNotes = mergedNotes.slice(0, 160);
+      extractorState.detectedChords = inferChordsFromNotes(extractorState.extractedNotes);
+
+      renderExtractedResults(sourceLabel, audioBuffer.duration);
+      if (badge) {
+        badge.textContent = `แกะโน้ตสำเร็จ (${extractorState.extractedNotes.length} โน้ต)`;
+      }
+    }
+
+    /** อัลกอริทึม Autocorrelation สำหรับจับความถี่พื้นฐาน (Pitch Detection) */
+    function autoCorrelatePitch(buf, sampleRate) {
+      const size = buf.length;
+      let rms = 0;
+      for (let i = 0; i < size; i += 2) {
+        rms += buf[i] * buf[i];
+      }
+      rms = Math.sqrt(rms / (size / 2));
+      if (rms < 0.015) return -1; // ตัดเสียงเงียบ/เสียงรบกวนเบาๆ
+
+      const minLag = Math.floor(sampleRate / 1100);
+      const maxLag = Math.min(Math.floor(sampleRate / 75), Math.floor(size / 2));
+      const stride = sampleRate >= 40000 ? 2 : 1;
+
+      let bestLag = -1;
+      let bestCorr = 0;
+
+      for (let lag = minLag; lag <= maxLag; lag++) {
+        let corr = 0;
+        let norm1 = 0;
+        let norm2 = 0;
+        for (let i = 0; i < size - lag; i += stride) {
+          const a = buf[i];
+          const b = buf[i + lag];
+          corr += a * b;
+          norm1 += a * a;
+          norm2 += b * b;
+        }
+        const denom = Math.sqrt(norm1 * norm2);
+        const normalized = denom > 0 ? corr / denom : 0;
+        if (normalized > bestCorr) {
+          bestCorr = normalized;
+          bestLag = lag;
+        }
+      }
+
+      if (bestCorr < 0.72 || bestLag === -1) return -1;
+      return sampleRate / bestLag;
+    }
+
+    /** แปลงความถี่ (Hz) เป็นชื่อโน้ตดนตรีสากล เช่น C4, D4, G4 */
+    function freqToNoteInfo(freq) {
+      const midi = Math.round(12 * Math.log2(freq / 440) + 69);
+      const noteName = NOTE_NAMES_SHARP[((midi % 12) + 12) % 12];
+      const octave = Math.floor(midi / 12) - 1;
+      return { note: `${noteName}${octave}`, midi };
+    }
+
+    /** รวมเฟรมที่ตรวจจับได้ติดกันเป็นบล็อกตัวโน้ตพร้อม Timestamp และความยาว */
+    function mergeFramesToNotes(frames, hopSec) {
+      const notes = [];
+      let current = null;
+
+      for (let i = 0; i < frames.length; i++) {
+        const f = frames[i];
+        if (!f.note) {
+          if (current) {
+            if (current.duration >= 0.09) notes.push(current);
+            current = null;
+          }
+          continue;
+        }
+
+        if (current && current.note === f.note) {
+          current.duration += hopSec;
+        } else {
+          if (current && current.duration >= 0.09) {
+            notes.push(current);
+          }
+          current = {
+            note: f.note,
+            freq: f.freq,
+            startTime: f.time,
+            duration: hopSec
+          };
+        }
+      }
+      if (current && current.duration >= 0.09) notes.push(current);
+      return notes;
+    }
+
+    /** วิเคราะห์คอร์ดที่น่าจะใช้จากกลุ่มโน้ตในช่วงเวลา 2 วินาที */
+    function inferChordsFromNotes(notes) {
+      if (!notes.length) return [];
+      const windows = {};
+      notes.forEach(n => {
+        const winIdx = Math.floor(n.startTime / 2);
+        const pc = n.note.replace(/[0-9]/g, '');
+        if (!windows[winIdx]) windows[winIdx] = [];
+        windows[winIdx].push(pc);
+      });
+
+      const progression = [];
+      Object.keys(windows).sort((a, b) => a - b).forEach(k => {
+        const pcs = windows[k];
+        let bestChord = CHORDS[0].id;
+        let bestScore = -1;
+
+        CHORDS.forEach(ch => {
+          const chordPcs = ch.guitar.notes.filter(Boolean).map(n => n.replace(/[0-9]/g, ''));
+          let score = 0;
+          pcs.forEach(p => { if (chordPcs.includes(p)) score++; });
+          if (score > bestScore) {
+            bestScore = score;
+            bestChord = ch.id;
+          }
+        });
+
+        if (progression[progression.length - 1] !== bestChord) {
+          progression.push(bestChord);
+        }
+      });
+
+      return progression.slice(0, 8);
+    }
+
+    /** แสดงผลไทม์ไลน์โน้ตและคอร์ดที่วิเคราะห์ได้บนหน้าจอ */
+    function renderExtractedResults(sourceLabel, totalDuration) {
+      const area = document.getElementById('extractorResultsArea');
+      const chordsRow = document.getElementById('detectedChordsRow');
+      const timeline = document.getElementById('noteTimelineContainer');
+      const summary = document.getElementById('extractSummaryInfo');
+
+      if (!area || !timeline) return;
+      area.style.display = 'flex';
+
+      // แสดงคอร์ดที่แนะนำ
+      if (chordsRow) {
+        if (extractorState.detectedChords.length > 0) {
+          chordsRow.innerHTML = `<span style="font-size:0.78rem; color:var(--text-muted);">คอร์ดที่วิเคราะห์ได้:</span>` +
+            extractorState.detectedChords.map(cId =>
+              `<button class="detected-chord-chip" onclick="selectChordById('${cId}')">${cId}</button>`
+            ).join('<span style="color:var(--text-dim);">→</span>');
+        } else {
+          chordsRow.innerHTML = '';
+        }
+      }
+
+      if (summary) {
+        summary.textContent = `${sourceLabel} • ${extractorState.extractedNotes.length} โน้ต (${totalDuration.toFixed(1)}s)`;
+      }
+
+      // สร้างบล็อกโน้ตที่คลิกได้บนไทม์ไลน์แนวนอน
+      timeline.innerHTML = '';
+      if (extractorState.extractedNotes.length === 0) {
+        timeline.innerHTML = '<div style="color:var(--text-muted); padding:16px; font-size:0.85rem;">ไม่พบโน้ตดนตรีที่ชัดเจนในไฟล์นี้ กรุณาลองไฟล์เสียงดนตรีที่ชัดขึ้นครับ</div>';
+        return;
+      }
+
+      extractorState.extractedNotes.forEach((item, idx) => {
+        const block = document.createElement('div');
+        block.className = 'note-block';
+        block.id = `ext-note-${idx}`;
+        block.onclick = () => playSingleExtractedNote(idx);
+
+        block.innerHTML = `
+          <div class="note-block-time">${item.startTime.toFixed(2)}s</div>
+          <div class="note-block-name">${item.note}</div>
+          <div class="note-block-dur">${item.duration.toFixed(2)}s</div>
+        `;
+        timeline.appendChild(block);
+      });
+    }
+
+    /** หาสายกีตาร์/อูคูเลเล่ที่ใกล้เคียงกับโน้ตเพื่อเล่นและแสดงแอนิเมชันสายสั่น */
+    function playNoteOnCurrentInstrument(noteName) {
+      let strIdx = 2;
+      if (state.instrument === 'ukulele') {
+        strIdx = noteName.includes('4') || noteName.includes('5') ? 3 : 1;
+      } else if (state.instrument === 'guitar') {
+        if (noteName.includes('2')) strIdx = 0;
+        else if (noteName.includes('3')) strIdx = 2;
+        else strIdx = 4;
+      } else {
+        strIdx = 0; // Piano
+      }
+      playPhysicalPluck(strIdx, noteName, 0, 0.85);
+    }
+
+    /** เล่นโน้ตเดี่ยวเมื่อผู้ใช้คลิกที่บล็อกบนไทม์ไลน์ */
+    function playSingleExtractedNote(idx) {
+      const item = extractorState.extractedNotes[idx];
+      if (!item) return;
+      highlightExtractedBlock(idx);
+      playNoteOnCurrentInstrument(item.note);
+    }
+
+    function highlightExtractedBlock(idx) {
+      document.querySelectorAll('.note-block.active-playing').forEach(el => el.classList.remove('active-playing'));
+      const el = document.getElementById(`ext-note-${idx}`);
+      if (el) {
+        el.classList.add('active-playing');
+        el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+
+    /** ปรับความเร็ว 0.5x - 1.5x สำหรับฝึกเล่นตาม */
+    function updateExtractSpeed(val) {
+      extractorState.speed = parseFloat(val);
+      const disp = document.getElementById('extractSpeedVal');
+      if (disp) disp.textContent = `${extractorState.speed.toFixed(2)}x`;
+
+      // ถ้ากำลังเล่นอยู่ ให้รีสตาร์ทการเล่นจากตำแหน่งปัจจุบันด้วยความเร็วใหม่ทันที
+      if (extractorState.isPlaying) {
+        const resumeIdx = Math.max(0, extractorState.activeIndex);
+        stopExtractedPlayback();
+        startExtractedPlaybackFrom(resumeIdx);
+      }
+    }
+
+    /** เปิด/ปิด การเล่นโน้ตที่แกะได้อัตโนมัติ */
+    function toggleExtractedPlayback() {
+      if (extractorState.isPlaying) {
+        stopExtractedPlayback();
+      } else {
+        startExtractedPlaybackFrom(0);
+      }
+    }
+
+    function startExtractedPlaybackFrom(startIdx = 0) {
+      if (!extractorState.extractedNotes.length) return;
+      userUnlockAudio();
+
+      extractorState.isPlaying = true;
+      const btn = document.getElementById('btnPlayExtracted');
+      const icon = document.getElementById('playExtractedIcon');
+      const text = document.getElementById('playExtractedText');
+      if (btn) btn.classList.add('playing');
+      if (icon) icon.textContent = '⏹';
+      if (text) text.textContent = 'หยุดเล่นโน้ต';
+
+      const baseTime = extractorState.extractedNotes[startIdx].startTime;
+      for (let i = startIdx; i < extractorState.extractedNotes.length; i++) {
+        const item = extractorState.extractedNotes[i];
+        const delayMs = ((item.startTime - baseTime) / extractorState.speed) * 1000;
+
+        const timer = setTimeout(() => {
+          extractorState.activeIndex = i;
+          highlightExtractedBlock(i);
+          playNoteOnCurrentInstrument(item.note);
+
+          if (i === extractorState.extractedNotes.length - 1) {
+            setTimeout(() => stopExtractedPlayback(), (item.duration / extractorState.speed) * 1000 + 250);
+          }
+        }, Math.max(0, delayMs));
+
+        extractorState.playbackTimers.push(timer);
+      }
+    }
+
+    function stopExtractedPlayback() {
+      extractorState.isPlaying = false;
+      extractorState.playbackTimers.forEach(t => clearTimeout(t));
+      extractorState.playbackTimers = [];
+      extractorState.activeIndex = -1;
+
+      const btn = document.getElementById('btnPlayExtracted');
+      const icon = document.getElementById('playExtractedIcon');
+      const text = document.getElementById('playExtractedText');
+      if (btn) btn.classList.remove('playing');
+      if (icon) icon.textContent = '▶';
+      if (text) text.textContent = 'เล่นโน้ตที่แกะได้อัตโนมัติ';
+
+      document.querySelectorAll('.note-block.active-playing').forEach(el => el.classList.remove('active-playing'));
+    }
+
+    /* ==========================================================================
+       12. INITIALIZATION (ทำงานทันทีแบบ 100% FAIL-SAFE)
        ========================================================================== */
     function initApp() {
       renderChordGrid();
