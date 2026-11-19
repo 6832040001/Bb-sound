@@ -148,7 +148,7 @@
     /* INSTRUMENT SELECTOR TABS */
     .instrument-selector-bar {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       background: var(--bg-surface);
       padding: 6px;
@@ -156,19 +156,25 @@
       border: 1px solid var(--border-subtle);
     }
 
+    @media (max-width: 720px) {
+      .instrument-selector-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .instrument-tab-btn {
-      padding: 12px 14px;
+      padding: 12px 10px;
       background: transparent;
       border: 1.5px solid transparent;
       border-radius: 10px;
       color: var(--text-muted);
       font-family: 'Prompt', sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       cursor: pointer;
       transition: all 0.2s ease;
     }
@@ -190,6 +196,148 @@
       border-color: var(--cyan);
       color: #e0f2fe;
       box-shadow: 0 4px 14px rgba(6, 182, 212, 0.25);
+    }
+
+    .instrument-tab-btn.active.piano-active {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.28), rgba(34, 38, 48, 0.92));
+      border-color: #c084fc;
+      color: #f3e8ff;
+      box-shadow: 0 4px 14px rgba(168, 85, 247, 0.28);
+    }
+
+    /* 61-KEY PIANO KEYBOARD MONITOR */
+    .piano-monitor-card {
+      background: var(--bg-surface);
+      border: 1px solid rgba(192, 132, 252, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      display: none;
+    }
+
+    .piano-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .piano-octave-jumps {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .piano-jump-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .piano-jump-btn:hover, .piano-jump-btn.active {
+      background: rgba(168, 85, 247, 0.25);
+      border-color: #c084fc;
+      color: #fff;
+    }
+
+    .piano-scroll-wrap {
+      overflow-x: auto;
+      background: #0b0d11;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 10px 8px 12px 8px;
+      scrollbar-width: thin;
+      scrollbar-color: #c084fc #14171f;
+    }
+
+    .piano-keyboard {
+      position: relative;
+      height: 168px;
+      display: flex;
+      width: max-content;
+      margin: 0 auto;
+    }
+
+    .piano-key-white {
+      width: 34px;
+      height: 164px;
+      background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 90%, #cbd5e1 100%);
+      border: 1px solid #475569;
+      border-radius: 0 0 6px 6px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #475569;
+      flex-shrink: 0;
+      transition: background 0.08s, transform 0.06s;
+    }
+
+    .piano-key-white:hover {
+      background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+    }
+
+    .piano-key-white.chord-highlight {
+      background: linear-gradient(180deg, #fef3c7 0%, #fde68a 90%, #f59e0b 100%);
+      color: #78350f;
+    }
+
+    .piano-key-white.active-note {
+      background: linear-gradient(180deg, #e9d5ff 0%, #c084fc 90%, #9333ea 100%) !important;
+      color: #fff !important;
+      transform: translateY(2px);
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25);
+    }
+
+    .piano-key-black {
+      width: 22px;
+      height: 102px;
+      background: linear-gradient(180deg, #334155 0%, #0f172a 85%, #020617 100%);
+      border: 1px solid #000;
+      border-radius: 0 0 5px 5px;
+      position: absolute;
+      top: 0;
+      z-index: 5;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 5px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.52rem;
+      color: #94a3b8;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.55);
+      transition: background 0.08s, transform 0.06s;
+    }
+
+    .piano-key-black:hover {
+      background: linear-gradient(180deg, #475569 0%, #1e293b 100%);
+    }
+
+    .piano-key-black.chord-highlight {
+      background: linear-gradient(180deg, #d97706 0%, #92400e 100%);
+      color: #fef3c7;
+    }
+
+    .piano-key-black.active-note {
+      background: linear-gradient(180deg, #a855f7 0%, #6b21a8 100%) !important;
+      color: #fff !important;
+      transform: translateY(2px);
     }
 
     .inst-badge {
@@ -919,13 +1067,18 @@
     <div class="instrument-selector-bar">
       <button class="instrument-tab-btn active" id="btnInstGuitar" onclick="switchInstrument('guitar')">
         <span>🎸</span>
-        <span>กีต้าร์โปร่ง (Acoustic Guitar)</span>
-        <span class="inst-badge">6 สาย (EADGBE)</span>
+        <span>กีต้าร์โปร่ง (Guitar)</span>
+        <span class="inst-badge">6 สาย</span>
       </button>
       <button class="instrument-tab-btn" id="btnInstUkulele" onclick="switchInstrument('ukulele')">
         <span>🪕</span>
         <span>อูคูเลเล่ (Ukulele)</span>
-        <span class="inst-badge">4 สาย (GCEA)</span>
+        <span class="inst-badge">4 สาย</span>
+      </button>
+      <button class="instrument-tab-btn" id="btnInstPiano" onclick="switchInstrument('piano')">
+        <span>🎹</span>
+        <span>เปียโน (Piano)</span>
+        <span class="inst-badge">61 คีย์</span>
       </button>
     </div>
 
@@ -1023,13 +1176,33 @@
     </div>
 
     <!-- VIRTUAL STRINGS MONITOR -->
-    <section class="strings-monitor-card">
+    <section class="strings-monitor-card" id="stringsMonitorCard">
       <div class="card-header-line">
         <div class="card-title" id="fretboardTitle">🎸 Strings Monitor (สายเครื่องดนตรี)</div>
         <div class="card-hint">แตะเพื่อดีดทีละเส้น หรือปัดผ่านเพื่อเกา</div>
       </div>
       <div class="guitar-strings-box" id="guitarStringsContainer">
         <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- 61-KEY PIANO MONITOR -->
+    <section class="piano-monitor-card" id="pianoMonitorCard">
+      <div class="piano-toolbar">
+        <div class="card-title">🎹 61-Key Piano (เปียโน 61 คีย์ C2–C7)</div>
+        <div class="piano-octave-jumps">
+          <button class="piano-jump-btn" onclick="scrollPianoToNote('C2')">C2</button>
+          <button class="piano-jump-btn" onclick="scrollPianoToNote('C3')">C3</button>
+          <button class="piano-jump-btn active" onclick="scrollPianoToNote('C4')">C4 (กลาง)</button>
+          <button class="piano-jump-btn" onclick="scrollPianoToNote('C5')">C5</button>
+          <button class="piano-jump-btn" onclick="scrollPianoToNote('C6')">C6</button>
+          <button class="piano-jump-btn" id="btnPianoSustain" onclick="togglePianoSustain()">Sustain: ON</button>
+        </div>
+      </div>
+      <div class="piano-scroll-wrap" id="pianoScrollWrap">
+        <div class="piano-keyboard" id="pianoKeyboardContainer">
+          <!-- 61 keys rendered dynamically -->
+        </div>
       </div>
     </section>
 
@@ -1140,7 +1313,8 @@
         keyChar: 'A',
         keyAlt: '1',
         guitar: { frets: 'x 3 2 0 1 0', rootStringIndex: 1, notes: [null, 'C3', 'E3', 'G3', 'C4', 'E4'] },
-        ukulele: { frets: '0 0 0 3', rootStringIndex: 1, notes: ['G4', 'C4', 'E4', 'C5'] }
+        ukulele: { frets: '0 0 0 3', rootStringIndex: 1, notes: ['G4', 'C4', 'E4', 'C5'] },
+        piano: { frets: 'C3 G3 C4 E4 G4', rootStringIndex: 0, notes: ['C3', 'G3', 'C4', 'E4', 'G4'] }
       },
       {
         id: 'G',
@@ -1149,7 +1323,8 @@
         keyChar: 'S',
         keyAlt: '2',
         guitar: { frets: '3 2 0 0 3 3', rootStringIndex: 0, notes: ['G2', 'B2', 'D3', 'G3', 'D4', 'G4'] },
-        ukulele: { frets: '0 2 3 2', rootStringIndex: 0, notes: ['G4', 'D4', 'G4', 'B4'] }
+        ukulele: { frets: '0 2 3 2', rootStringIndex: 0, notes: ['G4', 'D4', 'G4', 'B4'] },
+        piano: { frets: 'G2 D3 G3 B3 D4', rootStringIndex: 0, notes: ['G2', 'D3', 'G3', 'B3', 'D4'] }
       },
       {
         id: 'Am',
@@ -1158,7 +1333,8 @@
         keyChar: 'D',
         keyAlt: '3',
         guitar: { frets: 'x 0 2 2 1 0', rootStringIndex: 1, notes: [null, 'A2', 'E3', 'A3', 'C4', 'E4'] },
-        ukulele: { frets: '2 0 0 0', rootStringIndex: 0, notes: ['A4', 'C4', 'E4', 'A4'] }
+        ukulele: { frets: '2 0 0 0', rootStringIndex: 0, notes: ['A4', 'C4', 'E4', 'A4'] },
+        piano: { frets: 'A2 E3 A3 C4 E4', rootStringIndex: 0, notes: ['A2', 'E3', 'A3', 'C4', 'E4'] }
       },
       {
         id: 'F',
@@ -1167,7 +1343,8 @@
         keyChar: 'F',
         keyAlt: '4',
         guitar: { frets: '1 3 3 2 1 1', rootStringIndex: 0, notes: ['F2', 'C3', 'F3', 'A3', 'C4', 'F4'] },
-        ukulele: { frets: '2 0 1 0', rootStringIndex: 2, notes: ['A4', 'C4', 'F4', 'A4'] }
+        ukulele: { frets: '2 0 1 0', rootStringIndex: 2, notes: ['A4', 'C4', 'F4', 'A4'] },
+        piano: { frets: 'F2 C3 F3 A3 C4', rootStringIndex: 0, notes: ['F2', 'C3', 'F3', 'A3', 'C4'] }
       },
       {
         id: 'Dm',
@@ -1176,7 +1353,8 @@
         keyChar: 'G',
         keyAlt: '5',
         guitar: { frets: 'x x 0 2 3 1', rootStringIndex: 2, notes: [null, null, 'D3', 'A3', 'D4', 'F4'] },
-        ukulele: { frets: '2 2 1 0', rootStringIndex: 1, notes: ['A4', 'D4', 'F4', 'A4'] }
+        ukulele: { frets: '2 2 1 0', rootStringIndex: 1, notes: ['A4', 'D4', 'F4', 'A4'] },
+        piano: { frets: 'D3 A3 D4 F4 A4', rootStringIndex: 0, notes: ['D3', 'A3', 'D4', 'F4', 'A4'] }
       },
       {
         id: 'Em',
@@ -1185,7 +1363,8 @@
         keyChar: 'H',
         keyAlt: '6',
         guitar: { frets: '0 2 2 0 0 0', rootStringIndex: 0, notes: ['E2', 'B2', 'E3', 'G3', 'B3', 'E4'] },
-        ukulele: { frets: '0 4 3 2', rootStringIndex: 1, notes: ['G4', 'E4', 'G4', 'B4'] }
+        ukulele: { frets: '0 4 3 2', rootStringIndex: 1, notes: ['G4', 'E4', 'G4', 'B4'] },
+        piano: { frets: 'E2 B2 E3 G3 B3', rootStringIndex: 0, notes: ['E2', 'B2', 'E3', 'G3', 'B3'] }
       },
       {
         id: 'D',
@@ -1194,7 +1373,8 @@
         keyChar: 'J',
         keyAlt: '7',
         guitar: { frets: 'x x 0 2 3 2', rootStringIndex: 2, notes: [null, null, 'D3', 'A3', 'D4', 'F#4'] },
-        ukulele: { frets: '2 2 2 0', rootStringIndex: 1, notes: ['A4', 'D4', 'F#4', 'A4'] }
+        ukulele: { frets: '2 2 2 0', rootStringIndex: 1, notes: ['A4', 'D4', 'F#4', 'A4'] },
+        piano: { frets: 'D3 A3 D4 F#4 A4', rootStringIndex: 0, notes: ['D3', 'A3', 'D4', 'F#4', 'A4'] }
       },
       {
         id: 'A',
@@ -1203,7 +1383,8 @@
         keyChar: 'K',
         keyAlt: '8',
         guitar: { frets: 'x 0 2 2 2 0', rootStringIndex: 1, notes: [null, 'A2', 'E3', 'A3', 'C#4', 'E4'] },
-        ukulele: { frets: '2 1 0 0', rootStringIndex: 0, notes: ['A4', 'C#4', 'E4', 'A4'] }
+        ukulele: { frets: '2 1 0 0', rootStringIndex: 0, notes: ['A4', 'C#4', 'E4', 'A4'] },
+        piano: { frets: 'A2 E3 A3 C#4 E4', rootStringIndex: 0, notes: ['A2', 'E3', 'A3', 'C#4', 'E4'] }
       },
       {
         id: 'E',
@@ -1212,7 +1393,8 @@
         keyChar: 'L',
         keyAlt: '9',
         guitar: { frets: '0 2 2 1 0 0', rootStringIndex: 0, notes: ['E2', 'B2', 'E3', 'G#3', 'B3', 'E4'] },
-        ukulele: { frets: '1 4 0 2', rootStringIndex: 1, notes: ['G#4', 'E4', 'E4', 'B4'] }
+        ukulele: { frets: '1 4 0 2', rootStringIndex: 1, notes: ['G#4', 'E4', 'E4', 'B4'] },
+        piano: { frets: 'E2 B2 E3 G#3 B3', rootStringIndex: 0, notes: ['E2', 'B2', 'E3', 'G#3', 'B3'] }
       },
       {
         id: 'G7',
@@ -1221,7 +1403,8 @@
         keyChar: 'Z',
         keyAlt: '0',
         guitar: { frets: '3 2 0 0 0 1', rootStringIndex: 0, notes: ['G2', 'B2', 'D3', 'G3', 'B3', 'F4'] },
-        ukulele: { frets: '0 2 1 2', rootStringIndex: 0, notes: ['G4', 'D4', 'F4', 'B4'] }
+        ukulele: { frets: '0 2 1 2', rootStringIndex: 0, notes: ['G4', 'D4', 'F4', 'B4'] },
+        piano: { frets: 'G2 D3 G3 B3 F4', rootStringIndex: 0, notes: ['G2', 'D3', 'G3', 'B3', 'F4'] }
       },
       {
         id: 'C7',
@@ -1230,7 +1413,8 @@
         keyChar: 'X',
         keyAlt: '-',
         guitar: { frets: 'x 3 2 3 1 0', rootStringIndex: 1, notes: [null, 'C3', 'E3', 'A#3', 'C4', 'E4'] },
-        ukulele: { frets: '0 0 0 1', rootStringIndex: 1, notes: ['G4', 'C4', 'E4', 'A#4'] }
+        ukulele: { frets: '0 0 0 1', rootStringIndex: 1, notes: ['G4', 'C4', 'E4', 'A#4'] },
+        piano: { frets: 'C3 G3 A#3 C4 E4', rootStringIndex: 0, notes: ['C3', 'G3', 'A#3', 'C4', 'E4'] }
       },
       {
         id: 'Bb',
@@ -1239,7 +1423,8 @@
         keyChar: 'C',
         keyAlt: '=',
         guitar: { frets: 'x 1 3 3 3 1', rootStringIndex: 1, notes: [null, 'A#2', 'F3', 'A#3', 'D4', 'F4'] },
-        ukulele: { frets: '3 2 1 1', rootStringIndex: 0, notes: ['A#4', 'D4', 'F4', 'A#4'] }
+        ukulele: { frets: '3 2 1 1', rootStringIndex: 0, notes: ['A#4', 'D4', 'F4', 'A#4'] },
+        piano: { frets: 'A#2 F3 A#3 D4 F4', rootStringIndex: 0, notes: ['A#2', 'F3', 'A#3', 'D4', 'F4'] }
       }
     ];
 
@@ -1264,7 +1449,8 @@
        ========================================================================== */
     const state = {
       audioUnlocked: false,
-      instrument: 'guitar',        // 'guitar' | 'ukulele'
+      instrument: 'guitar',        // 'guitar' | 'ukulele' | 'piano'
+      pianoSustain: true,
       volume: 85,                  // 0..100%
       currentChord: CHORDS[0],     // คอร์ด C
       queuedChord: null,
@@ -1427,25 +1613,38 @@
     }
 
     /* ==========================================================================
-       4. INSTRUMENT SWITCHER (GUITAR vs UKULELE)
+       4. INSTRUMENT SWITCHER (GUITAR vs UKULELE vs PIANO)
        ========================================================================== */
     function switchInstrument(inst) {
       state.instrument = inst;
 
       const isUke = (inst === 'ukulele');
+      const isPiano = (inst === 'piano');
+      const isGuitar = (inst === 'guitar');
+
       const btnGuitar = document.getElementById('btnInstGuitar');
       const btnUke = document.getElementById('btnInstUkulele');
+      const btnPiano = document.getElementById('btnInstPiano');
       const icon = document.getElementById('mainBrandIcon');
       const title = document.getElementById('appHeaderTitle');
       const sub = document.getElementById('appHeaderSub');
       const mobHint = document.getElementById('mobileInstHint');
       const fretTitle = document.getElementById('fretboardTitle');
+      const stringsCard = document.getElementById('stringsMonitorCard');
+      const pianoCard = document.getElementById('pianoMonitorCard');
 
-      if (btnGuitar) btnGuitar.classList.toggle('active', !isUke);
+      if (btnGuitar) btnGuitar.classList.toggle('active', isGuitar);
       if (btnUke) {
         btnUke.classList.toggle('active', isUke);
         btnUke.classList.toggle('uke-active', isUke);
       }
+      if (btnPiano) {
+        btnPiano.classList.toggle('active', isPiano);
+        btnPiano.classList.toggle('piano-active', isPiano);
+      }
+
+      if (stringsCard) stringsCard.style.display = isPiano ? 'none' : 'block';
+      if (pianoCard) pianoCard.style.display = isPiano ? 'block' : 'none';
 
       if (isUke) {
         if (icon) icon.textContent = '🪕';
@@ -1454,6 +1653,12 @@
         if (mobHint) mobHint.textContent = 'โหมดอูคูเลเล่ 4 สาย';
         if (fretTitle) fretTitle.textContent = '🪕 Strings Monitor (อูคูเลเล่ 4 สาย)';
         state.strumSpeedMs = 26;
+      } else if (isPiano) {
+        if (icon) icon.textContent = '🎹';
+        if (title) title.textContent = 'Piano Omnichord Studio';
+        if (sub) sub.textContent = 'เปียโน 61 คีย์ (C2–C7) • Warm Grand Piano Tone';
+        if (mobHint) mobHint.textContent = 'โหมดเปียโน 61 คีย์';
+        state.strumSpeedMs = 18;
       } else {
         if (icon) icon.textContent = '🎸';
         if (title) title.textContent = 'Acoustic Omnichord Studio';
@@ -1469,18 +1674,28 @@
       if (speedDisp) speedDisp.textContent = `${state.strumSpeedMs} ms`;
 
       if (bodyFilter && audioCtx) {
-        bodyFilter.frequency.setValueAtTime(isUke ? 420 : 210, audioCtx.currentTime);
-        bodyFilter.gain.setValueAtTime(isUke ? 2.5 : 3.2, audioCtx.currentTime);
+        if (isPiano) {
+          bodyFilter.frequency.setValueAtTime(300, audioCtx.currentTime);
+          bodyFilter.gain.setValueAtTime(1.5, audioCtx.currentTime);
+        } else {
+          bodyFilter.frequency.setValueAtTime(isUke ? 420 : 210, audioCtx.currentTime);
+          bodyFilter.gain.setValueAtTime(isUke ? 2.5 : 3.2, audioCtx.currentTime);
+        }
       }
       if (warmthFilter && audioCtx) {
-        warmthFilter.frequency.setValueAtTime(isUke ? 5200 : 4200, audioCtx.currentTime);
+        warmthFilter.frequency.setValueAtTime(isUke ? 5200 : (isPiano ? 4800 : 4200), audioCtx.currentTime);
       }
 
       renderChordGrid();
-      renderStringsMonitor();
+      if (isPiano) {
+        renderPianoKeyboard();
+        setTimeout(() => scrollPianoToNote('C4'), 30);
+      } else {
+        renderStringsMonitor();
+      }
       applyChordChange(state.currentChord);
 
-      // ดีดทดสอบ 1 ครั้ง
+      // เล่นทดสอบ 1 ครั้ง
       triggerManualStrum('down');
     }
 
@@ -1506,38 +1721,51 @@
 
       const startTime = ctx.currentTime + Math.max(0, delaySec);
       const isUke = (state.instrument === 'ukulele');
-      const duration = isUke ? 1.55 : ([3.2, 2.9, 2.6, 2.3, 2.0, 1.8][stringIndex] || 2.4);
+      const isPiano = (state.instrument === 'piano');
+      const duration = isPiano
+        ? (state.pianoSustain ? 2.6 : 1.1)
+        : (isUke ? 1.55 : ([3.2, 2.9, 2.6, 2.3, 2.0, 1.8][stringIndex] || 2.4));
 
-      // ลดความดังต่อสายให้อยู่ในระดับพอดี นุ่มนวล และไม่แตกเมื่อดีด 6 สายพร้อมกัน
-      const perStringPeak = velocity * (isUke ? 0.26 : 0.21);
-      const attackTime = isUke ? 0.006 : 0.009;
+      // ลดความดังต่อสาย/คีย์ให้อยู่ในระดับพอดี นุ่มนวล และไม่แตกเมื่อเล่นหลายโน้ตพร้อมกัน
+      const perStringPeak = velocity * (isPiano ? 0.22 : (isUke ? 0.26 : 0.21));
+      const attackTime = isPiano ? 0.008 : (isUke ? 0.006 : 0.009);
 
       const stringGain = ctx.createGain();
       stringGain.gain.setValueAtTime(0.0001, startTime);
       stringGain.gain.linearRampToValueAtTime(perStringPeak, startTime + attackTime);
-      stringGain.gain.exponentialRampToValueAtTime(perStringPeak * 0.42, startTime + 0.22);
+      stringGain.gain.exponentialRampToValueAtTime(perStringPeak * (isPiano ? 0.48 : 0.42), startTime + 0.24);
       stringGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
 
-      // Lowpass Filter จำลองการหน่วงฮาร์มอนิกของสายกีต้าร์โปร่ง/อูคูเลเล่อย่างนุ่มนวล
+      // Lowpass Filter จำลองการหน่วงฮาร์มอนิกอย่างนุ่มนวล
       const stringFilter = ctx.createBiquadFilter();
       stringFilter.type = 'lowpass';
-      const initialCutoff = isUke ? Math.min(4600, freq * 7.5) : Math.min(3600, freq * 6.5);
+      const initialCutoff = isPiano
+        ? Math.min(4400, freq * 6.5)
+        : (isUke ? Math.min(4600, freq * 7.5) : Math.min(3600, freq * 6.5));
       stringFilter.frequency.setValueAtTime(initialCutoff, startTime);
-      stringFilter.frequency.exponentialRampToValueAtTime(freq * (isUke ? 1.6 : 1.35), startTime + 0.35);
+      stringFilter.frequency.exponentialRampToValueAtTime(freq * (isPiano ? 1.45 : (isUke ? 1.6 : 1.35)), startTime + 0.35);
       stringFilter.frequency.linearRampToValueAtTime(freq * 1.1, startTime + duration);
       stringFilter.Q.setValueAtTime(0.6, startTime);
 
-      // ผสมคลื่นเสียงให้กลมกล่อม: Fundamental (triangle) + Soft Acoustic Harmonic (sawtooth/sine)
+      // ผสมคลื่นเสียงให้กลมกล่อมตามเครื่องดนตรี
       const osc1 = ctx.createOscillator();
       const osc2 = ctx.createOscillator();
       const osc1Gain = ctx.createGain();
       const osc2Gain = ctx.createGain();
 
-      if (isUke) {
+      if (isPiano) {
+        // เสียงเปียโน (Warm Grand Piano): นุ่ม กังวาน สมดุล
         osc1.type = 'triangle';
         osc2.type = 'sine';
         osc1.frequency.setValueAtTime(freq, startTime);
-        osc2.frequency.setValueAtTime(freq * 2, startTime); // Subtle nylon 2nd harmonic
+        osc2.frequency.setValueAtTime(freq * 2, startTime);
+        osc1Gain.gain.setValueAtTime(0.82, startTime);
+        osc2Gain.gain.setValueAtTime(0.24, startTime);
+      } else if (isUke) {
+        osc1.type = 'triangle';
+        osc2.type = 'sine';
+        osc1.frequency.setValueAtTime(freq, startTime);
+        osc2.frequency.setValueAtTime(freq * 2, startTime);
         osc1Gain.gain.setValueAtTime(0.85, startTime);
         osc2Gain.gain.setValueAtTime(0.18, startTime);
       } else {
@@ -1545,12 +1773,12 @@
         osc1.type = 'triangle';
         osc2.type = 'sawtooth';
         osc1.frequency.setValueAtTime(freq, startTime);
-        osc2.frequency.setValueAtTime(freq + 0.35, startTime); // Natural subtle string chorus
+        osc2.frequency.setValueAtTime(freq + 0.35, startTime);
         osc1Gain.gain.setValueAtTime(0.78, startTime);
         osc2Gain.gain.setValueAtTime(stringIndex < 3 ? 0.24 : 0.16, startTime);
       }
 
-      // Soft Finger/Pick Transient (ลดเสียงแหลมแสบหูให้เป็นเสียงปัดนิ้ว/ปิ๊กนุ่มๆ)
+      // Soft Felt Hammer / Finger Transient
       const pickBuffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.014), ctx.sampleRate);
       const pickData = pickBuffer.getChannelData(0);
       for (let i = 0; i < pickData.length; i++) {
@@ -1561,11 +1789,11 @@
 
       const pickFilter = ctx.createBiquadFilter();
       pickFilter.type = 'bandpass';
-      pickFilter.frequency.setValueAtTime(Math.min(2800, freq * (isUke ? 4.5 : 3.5)), startTime);
+      pickFilter.frequency.setValueAtTime(Math.min(2800, freq * (isPiano ? 3.0 : (isUke ? 4.5 : 3.5))), startTime);
       pickFilter.Q.setValueAtTime(1.6, startTime);
 
       const pickGain = ctx.createGain();
-      pickGain.gain.setValueAtTime(perStringPeak * (isUke ? 0.22 : 0.18), startTime);
+      pickGain.gain.setValueAtTime(perStringPeak * (isPiano ? 0.12 : (isUke ? 0.22 : 0.18)), startTime);
 
       osc1.connect(osc1Gain);
       osc2.connect(osc2Gain);
@@ -1653,6 +1881,11 @@
     }
 
     function animateStringVibration(stringIndex, note) {
+      if (state.instrument === 'piano') {
+        animatePianoKey(note);
+        return;
+      }
+
       const lineEl = document.getElementById(`str-line-${stringIndex}`);
       const pillEl = document.getElementById(`pill-str-${stringIndex}`);
 
@@ -1670,11 +1903,21 @@
       }
     }
 
+    function animatePianoKey(noteName) {
+      const keyEl = document.getElementById(`piano-key-${noteName}`);
+      if (keyEl) {
+        keyEl.classList.add('active-note');
+        setTimeout(() => keyEl.classList.remove('active-note'), 240);
+      }
+    }
+
     /* ==========================================================================
        6. CHORD LOGIC & STRUMMING
        ========================================================================== */
     function getCurrentInstrumentChordData(chordObj = state.currentChord) {
-      return (state.instrument === 'ukulele') ? chordObj.ukulele : chordObj.guitar;
+      if (state.instrument === 'ukulele') return chordObj.ukulele;
+      if (state.instrument === 'piano') return chordObj.piano;
+      return chordObj.guitar;
     }
 
     function executeStrum(direction, chordObj = state.currentChord, baseDelaySec = 0) {
@@ -1731,6 +1974,8 @@
       let sequence = [];
       if (state.instrument === 'ukulele') {
         sequence = [1, 0, 2, 3, 2, 0, 1, 3];
+      } else if (state.instrument === 'piano') {
+        sequence = [0, 1, 2, 3, 4, 3, 2, 1];
       } else {
         sequence = [rootIdx, 2, 3, 4, 5, 4, 3, 2];
       }
@@ -1739,7 +1984,8 @@
       const eighthSec = beatDurationSec / 2;
 
       sequence.forEach((strIdx, i) => {
-        const note = notes[strIdx] || (state.instrument === 'ukulele' ? OPEN_UKE_STRINGS[strIdx].defaultNote : OPEN_GUITAR_STRINGS[strIdx].defaultNote);
+        const fallbackSet = (state.instrument === 'ukulele') ? OPEN_UKE_STRINGS : OPEN_GUITAR_STRINGS;
+        const note = notes[strIdx] || (fallbackSet[strIdx] ? fallbackSet[strIdx].defaultNote : notes[0]);
         playPhysicalPluck(strIdx, note, i * eighthSec, 0.82);
       });
     }
@@ -1752,10 +1998,8 @@
       if (!container) return;
       container.innerHTML = '';
 
-      const isUke = (state.instrument === 'ukulele');
-
       CHORDS.forEach((chord) => {
-        const chordData = isUke ? chord.ukulele : chord.guitar;
+        const chordData = getCurrentInstrumentChordData(chord);
         const pad = document.createElement('div');
         pad.className = `chord-pad ${chord.id === state.currentChord.id ? 'active' : ''}`;
         pad.id = `chord-pad-${chord.id}`;
@@ -1838,15 +2082,19 @@
       const activePad = document.getElementById(`chord-pad-${chord.id}`);
       if (activePad) activePad.classList.add('active');
 
-      const isUke = (state.instrument === 'ukulele');
-      const chordData = isUke ? chord.ukulele : chord.guitar;
+      const chordData = getCurrentInstrumentChordData(chord);
+      const prefix = state.instrument === 'ukulele' ? 'Uke: ' : (state.instrument === 'piano' ? 'Piano: ' : '');
 
       const nameDisp = document.getElementById('activeChordNameDisplay');
       const typeDisp = document.getElementById('activeChordTypeDisplay');
       if (nameDisp) nameDisp.textContent = chord.name;
-      if (typeDisp) typeDisp.textContent = `${chord.name} ${chord.type} (${isUke ? 'Uke: ' : ''}${chordData.frets})`;
+      if (typeDisp) typeDisp.textContent = `${chord.name} ${chord.type} (${prefix}${chordData.frets})`;
 
-      updateFretboardStringLabels();
+      if (state.instrument === 'piano') {
+        highlightPianoChordNotes(chordData.notes);
+      } else {
+        updateFretboardStringLabels();
+      }
     }
 
     function updateFretboardStringLabels() {
@@ -1872,6 +2120,82 @@
           }
         }
       }
+    }
+
+    /* ==========================================================================
+       7B. 61-KEY PIANO KEYBOARD (C2 - C7)
+       ========================================================================== */
+    function renderPianoKeyboard() {
+      const container = document.getElementById('pianoKeyboardContainer');
+      if (!container) return;
+      if (container.children.length === 61) return; // สร้างไว้แล้วไม่ต้องสร้างซ้ำ
+
+      container.innerHTML = '';
+      const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+      const blackIndices = new Set([1, 3, 6, 8, 10]);
+      let whiteCount = 0;
+
+      // 61 คีย์: MIDI 36 (C2) ถึง MIDI 96 (C7)
+      for (let midi = 36; midi <= 96; midi++) {
+        const semitone = midi % 12;
+        const octave = Math.floor(midi / 12) - 1;
+        const noteName = `${noteNames[semitone]}${octave}`;
+        const isBlack = blackIndices.has(semitone);
+
+        const keyEl = document.createElement('div');
+        keyEl.id = `piano-key-${noteName}`;
+        keyEl.dataset.note = noteName;
+
+        if (isBlack) {
+          keyEl.className = 'piano-key-black';
+          keyEl.style.left = `${whiteCount * 34 - 11}px`;
+          keyEl.textContent = noteName.replace('#', '♯');
+        } else {
+          keyEl.className = 'piano-key-white';
+          keyEl.textContent = semitone === 0 ? noteName : noteNames[semitone];
+          whiteCount++;
+        }
+
+        keyEl.onpointerdown = (e) => {
+          e.preventDefault();
+          playPhysicalPluck(0, noteName, 0, 0.88);
+        };
+        keyEl.onpointerenter = (e) => {
+          if (e.buttons === 1) {
+            playPhysicalPluck(0, noteName, 0, 0.8);
+          }
+        };
+
+        container.appendChild(keyEl);
+      }
+    }
+
+    function highlightPianoChordNotes(notes) {
+      document.querySelectorAll('.piano-key-white, .piano-key-black').forEach(k => {
+        k.classList.remove('chord-highlight');
+      });
+      if (!notes) return;
+      notes.forEach(n => {
+        const el = document.getElementById(`piano-key-${n}`);
+        if (el) el.classList.add('chord-highlight');
+      });
+    }
+
+    function scrollPianoToNote(noteName) {
+      const wrap = document.getElementById('pianoScrollWrap');
+      const keyEl = document.getElementById(`piano-key-${noteName}`);
+      if (wrap && keyEl) {
+        wrap.scrollTo({
+          left: Math.max(0, keyEl.offsetLeft - wrap.clientWidth / 3),
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    function togglePianoSustain() {
+      state.pianoSustain = !state.pianoSustain;
+      const btn = document.getElementById('btnPianoSustain');
+      if (btn) btn.textContent = `Sustain: ${state.pianoSustain ? 'ON' : 'OFF'}`;
     }
 
     /* ==========================================================================
@@ -2000,6 +2324,8 @@
       let targetString = null;
       if (state.instrument === 'ukulele') {
         targetString = [1, 0, 2, 3, 2, 0, 1, 3][noteIndex];
+      } else if (state.instrument === 'piano') {
+        targetString = [0, 1, 2, 3, 4, 3, 2, 1][noteIndex];
       } else {
         const altBass = (rootIdx === 0) ? 2 : 0;
         targetString = [rootIdx, 2, 3, 4, altBass, 4, 3, 2][noteIndex];
@@ -2007,7 +2333,7 @@
 
       if (targetString !== null && targetString !== undefined) {
         const openSet = (state.instrument === 'ukulele') ? OPEN_UKE_STRINGS : OPEN_GUITAR_STRINGS;
-        const note = notes[targetString] || openSet[targetString].defaultNote;
+        const note = notes[targetString] || (openSet[targetString] ? openSet[targetString].defaultNote : notes[0]);
         playPhysicalPluck(targetString, note, 0, 0.85);
       }
     }
